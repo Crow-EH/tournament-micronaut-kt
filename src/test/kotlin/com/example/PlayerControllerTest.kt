@@ -1,5 +1,6 @@
 package com.example
 
+import com.example.controller.PlayerController.Companion.PATH
 import com.example.model.PlayerDtoCreate
 import com.example.model.PlayerDtoUpdate
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
@@ -16,7 +17,7 @@ class PlayerControllerTest(val spec: RequestSpecification) {
     @AfterEach
     fun cleanup() {
         spec.`when`()
-            .delete("/players")
+            .delete(PATH)
             .then()
             .statusCode(200)
     }
@@ -47,7 +48,7 @@ class PlayerControllerTest(val spec: RequestSpecification) {
             .body("score", equalTo(2))
 
         spec.`when`()
-            .delete("/players")
+            .delete(PATH)
             .then()
             .statusCode(200)
 
@@ -99,7 +100,7 @@ class PlayerControllerTest(val spec: RequestSpecification) {
     private fun RequestSpecification.getAllPlayers(): ValidatableResponse {
         return this
             .`when`()
-            .get("/players")
+            .get(PATH)
             .then()
             .statusCode(200)
     }
@@ -107,7 +108,7 @@ class PlayerControllerTest(val spec: RequestSpecification) {
     private fun RequestSpecification.getPlayer(nickname: String): ValidatableResponse {
         return this
             .`when`()
-            .get("/players/${nickname}")
+            .get("$PATH/${nickname}")
             .then()
             .statusCode(200)
     }
@@ -118,7 +119,7 @@ class PlayerControllerTest(val spec: RequestSpecification) {
             .body(PlayerDtoCreate(nickname))
             .contentType(ContentType.JSON)
             .`when`()
-            .post("/players")
+            .post(PATH)
             .then()
             .statusCode(200)
     }
@@ -129,7 +130,7 @@ class PlayerControllerTest(val spec: RequestSpecification) {
             .body(PlayerDtoUpdate(newScore))
             .contentType(ContentType.JSON)
             .`when`()
-            .put("/players/$nickname")
+            .put("$PATH/$nickname")
             .then()
             .statusCode(200)
     }

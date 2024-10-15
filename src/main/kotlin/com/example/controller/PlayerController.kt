@@ -1,5 +1,6 @@
 package com.example.controller
 
+import com.example.controller.PlayerController.Companion.PATH
 import com.example.service.PlayerService
 import com.example.model.PlayerDto
 import com.example.model.PlayerDtoCreate
@@ -7,8 +8,11 @@ import com.example.model.PlayerDtoUpdate
 import io.micronaut.http.annotation.*
 import jakarta.validation.Valid
 
-@Controller("/players")
+@Controller(PATH)
 open class PlayerController(private val playerService: PlayerService) {
+    companion object {
+        const val PATH = "/players"
+    }
 
     @Get
     fun getAllPlayers() : List<PlayerDto> {
@@ -21,7 +25,7 @@ open class PlayerController(private val playerService: PlayerService) {
     }
 
     @Post
-    fun createPlayer(@Body player: PlayerDtoCreate) {
+    open fun createPlayer(@Valid @Body player: PlayerDtoCreate) {
         playerService.createPlayer(player)
     }
 
@@ -31,7 +35,7 @@ open class PlayerController(private val playerService: PlayerService) {
     }
 
     @Delete
-    open fun deleteAllPlayers() {
+    fun deleteAllPlayers() {
         playerService.deleteAllPlayers()
     }
 
