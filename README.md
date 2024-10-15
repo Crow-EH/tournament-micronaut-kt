@@ -8,10 +8,10 @@ A simple API to handle players' scores on a single active tournament.
 * Docker and docker compose for postgres during tests and local runs
 
 ## Commands
-* Single script to build + test + (re)start postgres + run: `./build-and-run.sh`
-* Build and run with Gradle: `gradle run`
-* Build with gradle and run with java: `gradle build` then `java -jar build/libs/tournament-0.1-all-optimized.jar`
 * Test: `gradle test`. During `test` (and `build`, that includes `test`), a local postgres docker container will be started by Testcontainers.
+* Single script to build + test + (re)start postgres + run with non-test profile: `./build-and-run.sh`
+* Build and run with Gradle with test profile (postgres started automatically): `gradle run`
+* Manual build with gradle without test and run with java: `gradle assemble` then `MICRONAUT_ENVIRONMENTS=local java -jar build/libs/tournament-0.1-all-optimized.jar`
 
 ## Resources
 * OpenAPI: http://localhost:8080/api/v1/swagger/tournament-api-0.1.yml
