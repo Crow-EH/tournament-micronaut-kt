@@ -17,4 +17,3 @@ object Application {
         run(*args)
     }
 }
-

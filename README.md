@@ -12,6 +12,7 @@
 
 ## Resources
 * OpenAPI: http://localhost:8080/swagger/tournament-api-0.1.yml
+* Swagger UI: http://localhost:8080/swagger-ui
 
 ## What's missing to release in production
 
