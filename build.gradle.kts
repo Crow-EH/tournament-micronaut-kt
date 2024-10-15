@@ -22,6 +22,8 @@ dependencies {
     ksp("io.micronaut:micronaut-http-validation")
     ksp("io.micronaut.serde:micronaut-serde-processor")
     ksp("io.micronaut.validation:micronaut-validation-processor")
+    ksp("io.micronaut.openapi:micronaut-openapi")
+    compileOnly("io.micronaut.openapi:micronaut-openapi-annotations")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
@@ -43,7 +45,7 @@ dependencies {
 
 
 application {
-    mainClass = "com.example.ApplicationKt"
+    mainClass = "com.example.Application"
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("21")
@@ -59,9 +61,6 @@ micronaut {
         incremental(true)
         annotations("com.example.*")
     }
-//    testResources {
-//        additionalModules.add("hibernate-reactive-postgresql")
-//    }
     aot {
         // Please review carefully the optimizations enabled below
         // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
