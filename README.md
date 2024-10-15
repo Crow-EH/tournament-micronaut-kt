@@ -2,6 +2,10 @@
 
 A simple API to handle players' scores on a single active tournament.
 
+All run profiles (test and locale) use both a postgres container and flyway for migration.
+
+A Swagger UI documentation is available bellow.
+
 ## Requirements
 * Java 21
 * Gradle 8 (or use the provided gradlew/gradlew.bat scripts)
@@ -15,7 +19,7 @@ A simple API to handle players' scores on a single active tournament.
 
 ## Resources
 * OpenAPI: http://localhost:8080/api/v1/swagger/tournament-api-0.1.yml
-* Swagger UI: http://localhost:8080/api/v1/swagger-ui (as documentation, interactive calls were not tested)
+* Swagger UI: http://localhost:8080/api/v1/swagger-ui
 * Make sure to pass the correct `Content-Type` header, otherwise you'll get a 415 !
 * Example: `curl -v -X POST localhost:8080/api/v1/players --data '{ "nickname": "bob" }' -H 'Content-Type: application/json'`
 

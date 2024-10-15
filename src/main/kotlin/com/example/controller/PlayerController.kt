@@ -6,8 +6,10 @@ import com.example.model.PlayerDto
 import com.example.model.PlayerDtoCreate
 import com.example.model.PlayerDtoUpdate
 import io.micronaut.http.annotation.*
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 
+@Tag(name = PATH)
 @Controller(PATH)
 open class PlayerController(private val playerService: PlayerService) {
     companion object {
