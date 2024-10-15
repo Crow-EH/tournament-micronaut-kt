@@ -14,10 +14,10 @@ A simple API to handle players' scores on a single active tournament.
 * Test: `gradle test`. During `test` (and `build`, that includes `test`), a local postgres docker container will be started by Testcontainers.
 
 ## Resources
-* OpenAPI: http://localhost:8080/swagger/tournament-api-0.1.yml
-* Swagger UI: http://localhost:8080/swagger-ui (as documentation, interactive calls were not tested)
+* OpenAPI: http://localhost:8080/api/v1/swagger/tournament-api-0.1.yml
+* Swagger UI: http://localhost:8080/api/v1/swagger-ui (as documentation, interactive calls were not tested)
 * Make sure to pass the correct `Content-Type` header, otherwise you'll get a 415 !
-* Example: `curl -v -X POST localhost:8080/players --data '{ "nickname": "bob" }' -H 'Content-Type: application/json'`
+* Example: `curl -v -X POST localhost:8080/api/v1/players --data '{ "nickname": "bob" }' -H 'Content-Type: application/json'`
 
 ## What's missing to release in production
 

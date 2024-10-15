@@ -1,6 +1,8 @@
 micronaut:
   application:
     name: tournament
+  server:
+    context-path: /api/v1
   router:
     static-resources:
       swagger:
