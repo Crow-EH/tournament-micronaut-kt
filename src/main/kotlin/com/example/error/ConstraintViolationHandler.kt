@@ -10,7 +10,10 @@ import org.hibernate.exception.ConstraintViolationException
 @Singleton
 @Produces
 class ConstraintViolationHandler : ExceptionHandler<ConstraintViolationException, HttpResponse<String>> {
-    override fun handle(request: HttpRequest<*>?, exception: ConstraintViolationException?): HttpResponse<String> {
+    override fun handle(
+        request: HttpRequest<*>?,
+        exception: ConstraintViolationException?,
+    ): HttpResponse<String> {
         return HttpResponse.badRequest(exception?.message ?: "unknown sql constraint violation")
     }
 }

@@ -12,7 +12,6 @@ import jakarta.inject.Singleton
 
 @Singleton
 open class PlayerService(private val playerRepository: PlayerRepository) {
-
     @Transactional(readOnly = true)
     open fun findAllPlayerForActiveTournament(): List<PlayerDto> {
         return playerRepository.findAllRanked().map {
@@ -23,8 +22,8 @@ open class PlayerService(private val playerRepository: PlayerRepository) {
     @Transactional(readOnly = true)
     open fun findOnePlayerForActiveTournament(nickname: String): PlayerDto {
         return playerRepository.findByIdRanked(nickname)
-                .map { PlayerDto(it.nickname, it.score, it.rank) }
-                .orElseThrow { HttpStatusException(HttpStatus.NOT_FOUND, "Player $nickname does not exist") }
+            .map { PlayerDto(it.nickname, it.score, it.rank) }
+            .orElseThrow { HttpStatusException(HttpStatus.NOT_FOUND, "Player $nickname does not exist") }
     }
 
     @Transactional
@@ -33,8 +32,12 @@ open class PlayerService(private val playerRepository: PlayerRepository) {
     }
 
     @Transactional
-    open fun updatePlayer(nickname: String, playerUpdate: PlayerDtoUpdate) {
-        val player = playerRepository.findById(nickname)
+    open fun updatePlayer(
+        nickname: String,
+        playerUpdate: PlayerDtoUpdate,
+    ) {
+        val player =
+            playerRepository.findById(nickname)
                 .orElseThrow { HttpStatusException(HttpStatus.NOT_FOUND, "Player $nickname does not exist") }
         player.score = playerUpdate.score
         playerRepository.update(player)
@@ -44,5 +47,4 @@ open class PlayerService(private val playerRepository: PlayerRepository) {
     open fun deleteAllPlayers() {
         playerRepository.deleteAll()
     }
-
 }

@@ -7,6 +7,7 @@ plugins {
     id("io.micronaut.application") version "4.4.2"
     id("io.micronaut.test-resources") version "4.4.2"
     id("io.micronaut.aot") version "4.4.2"
+    id("com.diffplug.spotless") version "6.25.0"
 }
 
 version = "0.1"
@@ -30,8 +31,8 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.validation:micronaut-validation")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -43,14 +44,12 @@ dependencies {
     testImplementation("org.mockito:mockito-core")
 }
 
-
 application {
     mainClass = "com.example.Application"
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("21")
 }
-
 
 graalvmNative.toolchainDetection = false
 
@@ -75,9 +74,17 @@ micronaut {
     }
 }
 
-
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     jdkVersion = "21"
 }
 
-
+spotless {
+    kotlin {
+        ktlint()
+        endWithNewline()
+    }
+    kotlinGradle {
+        ktlint()
+        endWithNewline()
+    }
+}

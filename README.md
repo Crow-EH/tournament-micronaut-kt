@@ -16,6 +16,8 @@ A Swagger UI documentation is available bellow.
 * Single script to build + test + (re)start postgres + run with non-test profile: `./build-and-run.sh`
 * Build and run with Gradle with test profile (postgres started automatically): `gradle run`
 * Manual build with gradle without test and run with java: `gradle assemble` then `MICRONAUT_ENVIRONMENTS=local java -jar build/libs/tournament-0.1-all-optimized.jar`
+* Lint and format with ktlint: `gradle spotlessApply`
+* Check only: `gradle spotlessCheck`
 
 ## Resources
 * OpenAPI: http://localhost:8080/api/v1/swagger/tournament-api-0.1.yml
@@ -54,7 +56,7 @@ A Swagger UI documentation is available bellow.
 * Depending on the deployment plan and the scaling configuration, the very basic Flyway migration (at application startup) may not be the best. Having an external tool handling sync between blue/green env could be better, or any other way to ensure service continuity. 
 * Automatic external tests on a real environment would be a plus.
 * Measuring the coverage and scanning the project with Sonarqube would be a plus too.
-* A formatting plugin + check in CI to avoid useless noise in reviews.
+* Check formatting in CI to avoid useless noise in reviews.
 
 ### Better monitoring and a look on the performance
 * The logs should be collected and indexed somewhere, preferably with visualization and monitored aggregations (i.e. error rate, etc.). Something like an ELK or Datadog.

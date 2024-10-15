@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test
 
 @MicronautTest
 class PlayerControllerTest(val spec: RequestSpecification) {
-
     @AfterEach
     fun cleanup() {
         spec.`when`()
@@ -108,7 +107,7 @@ class PlayerControllerTest(val spec: RequestSpecification) {
     private fun RequestSpecification.getPlayer(nickname: String): ValidatableResponse {
         return this
             .`when`()
-            .get("$PATH/${nickname}")
+            .get("$PATH/$nickname")
             .then()
             .statusCode(200)
     }
@@ -124,7 +123,10 @@ class PlayerControllerTest(val spec: RequestSpecification) {
             .statusCode(200)
     }
 
-    private fun RequestSpecification.updatePlayerScore(nickname: String, newScore: Int): ValidatableResponse {
+    private fun RequestSpecification.updatePlayerScore(
+        nickname: String,
+        newScore: Int,
+    ): ValidatableResponse {
         return this
             .given()
             .body(PlayerDtoUpdate(newScore))
@@ -134,5 +136,4 @@ class PlayerControllerTest(val spec: RequestSpecification) {
             .then()
             .statusCode(200)
     }
-
 }

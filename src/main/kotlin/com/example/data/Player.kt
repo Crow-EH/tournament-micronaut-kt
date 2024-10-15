@@ -5,6 +5,7 @@ import jakarta.persistence.Id
 
 @Entity
 data class Player(
-        @Id
-        val nickname: String,
-        var score: Int = 0)
+    @Id
+    val nickname: String,
+    var score: Int = 0,
+)

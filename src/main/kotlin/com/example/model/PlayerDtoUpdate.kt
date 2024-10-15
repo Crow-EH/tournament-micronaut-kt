@@ -5,4 +5,6 @@ import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotNull
 
 @Serdeable
-data class PlayerDtoUpdate(@field:NotNull @field:Min(1) val score: Int)
+data class PlayerDtoUpdate(
+    @field:NotNull @field:Min(1) val score: Int,
+)
