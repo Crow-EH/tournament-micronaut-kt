@@ -1,0 +1,20 @@
+micronaut:
+  application:
+    name: tournament
+datasources:
+  default:
+    driver-class-name: org.postgresql.Driver
+    db-type: postgres
+    dialect: POSTGRES
+flyway:
+  datasources:
+    default:
+      enabled: true
+jpa:
+  default:
+    properties:
+      hibernate:
+        connection:
+          db-type: postgres
+        hbm2ddl:
+          auto: validate
