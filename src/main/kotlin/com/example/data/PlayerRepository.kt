@@ -5,4 +5,6 @@ import io.micronaut.data.annotation.Repository
 import io.micronaut.data.repository.CrudRepository
 
 @Repository
-interface PlayerRepository : CrudRepository<Player, String>
+interface PlayerRepository : CrudRepository<Player, String> {
+    fun findAllOrderByScoreDesc(): List<Player>
+}

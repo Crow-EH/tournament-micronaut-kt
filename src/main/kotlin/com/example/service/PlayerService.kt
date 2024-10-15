@@ -13,7 +13,7 @@ import jakarta.inject.Singleton
 class PlayerService(private val playerRepository: PlayerRepository) {
 
     fun findAllPlayerForActiveTournament(): List<PlayerDto> {
-        return playerRepository.findAll().map {
+        return playerRepository.findAllOrderByScoreDesc().map {
             PlayerDto(it.nickname, it.score)
         }
     }

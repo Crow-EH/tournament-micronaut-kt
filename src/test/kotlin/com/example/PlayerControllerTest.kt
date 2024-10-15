@@ -86,4 +86,74 @@ class PlayerControllerTest {
                 .body("size()", equalTo(0))
     }
 
+    @Test
+    fun shouldBeOrderByScoreDesc(spec: RequestSpecification) {
+        val nick1 = "bob"
+        val nick2 = "lea"
+        val nick3 = "tim"
+
+        spec
+                .`when`()
+                .get("/players")
+                .then()
+                .statusCode(200)
+                .body("size()", equalTo(0))
+
+        spec
+                .given()
+                .body(PlayerDtoCreate(nick1))
+                .contentType(ContentType.JSON)
+                .`when`()
+                .post("/players")
+                .then()
+                .statusCode(200)
+
+        spec
+                .given()
+                .body(PlayerDtoCreate(nick2))
+                .contentType(ContentType.JSON)
+                .`when`()
+                .post("/players")
+                .then()
+                .statusCode(200)
+
+        spec
+                .given()
+                .body(PlayerDtoCreate(nick3))
+                .contentType(ContentType.JSON)
+                .`when`()
+                .post("/players")
+                .then()
+                .statusCode(200)
+
+        spec
+                .given()
+                .body(PlayerDtoUpdate(2))
+                .contentType(ContentType.JSON)
+                .`when`()
+                .put("/players/$nick2")
+                .then()
+                .statusCode(200)
+
+        spec
+                .given()
+                .body(PlayerDtoUpdate(1))
+                .contentType(ContentType.JSON)
+                .`when`()
+                .put("/players/$nick1")
+                .then()
+                .statusCode(200)
+
+        spec
+                .`when`()
+                .get("/players")
+                .then()
+                .statusCode(200)
+                .body("size()", equalTo(3))
+                .body("[0].nickname", equalTo(nick2))
+                .body("[0].score", equalTo(2))
+                .body("[1].nickname", equalTo(nick1))
+                .body("[1].score", equalTo(1))
+    }
+
 }
