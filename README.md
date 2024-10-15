@@ -50,4 +50,5 @@
 * The logs should be collected and indexed somewhere, preferably with visualization and monitored aggregations (i.e. error rate, etc.). Something like an ELK or Datadog.
 * An APM could be a plus to instrument eventual optimization projects / performance improvement tasks
 * There's definitely some work on the transactions, most of them could have been read only to not lock the table.
+* There's probably some work to do on the find one ranked query, the use of the "with" sub-select is a bit brutal.
 * An automatic load test, either in CI or a real ISO env could be a plus.

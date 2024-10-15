@@ -13,14 +13,14 @@ import jakarta.inject.Singleton
 class PlayerService(private val playerRepository: PlayerRepository) {
 
     fun findAllPlayerForActiveTournament(): List<PlayerDto> {
-        return playerRepository.findAllOrderByScoreDesc().map {
-            PlayerDto(it.nickname, it.score)
+        return playerRepository.findAllRanked().map {
+            PlayerDto(it.nickname, it.score, it.rank)
         }
     }
 
     fun findOnePlayerForActiveTournament(nickname: String): PlayerDto {
-        return playerRepository.findById(nickname)
-                .map { PlayerDto(it.nickname, it.score) }
+        return playerRepository.findByIdRanked(nickname)
+                .map { PlayerDto(it.nickname, it.score, it.rank) }
                 .orElseThrow { HttpStatusException(HttpStatus.NOT_FOUND, "Player $nickname does not exist") }
     }
 
