@@ -1,22 +1,27 @@
 # Tournament API
 
+A simple API to handle players' scores on a single active tournament.
+
 ## Requirements
 * Java 21
-* Gradle 8 (or use the provided gradlew scripts)
-* Docker and docker compose
+* Gradle 8 (or use the provided gradlew/gradlew.bat scripts)
+* Docker and docker compose for postgres during tests and local runs
 
 ## Commands
-* Single command to build + (re)start postgres + run: `./build-and-run.sh`
+* Single script to build + test + (re)start postgres + run: `./build-and-run.sh`
 * Build and run with Gradle: `gradle run`
 * Build with gradle and run with java: `gradle build` then `java -jar build/libs/tournament-0.1-all-optimized.jar`
+* Test: `gradle test`. During `test` (and `build`, that includes `test`), a local postgres docker container will be started by Testcontainers.
 
 ## Resources
 * OpenAPI: http://localhost:8080/swagger/tournament-api-0.1.yml
-* Swagger UI: http://localhost:8080/swagger-ui
+* Swagger UI: http://localhost:8080/swagger-ui (as documentation, interactive calls were not tested)
+* Make sure to pass the correct `Content-Type` header, otherwise you'll get a 415 !
+* Example: `curl -v -X POST localhost:8080/players --data '{ "nickname": "bob" }' -H 'Content-Type: application/json'`
 
 ## What's missing to release in production
 
-### A better data model
+### A better data model and API model (optional)
 * We should have a Tournament table (1-N with Player). This would allow:
   * Data retention if we have to implement a history later or simply complete the API model with tournaments management
   * Multiple tournaments at the same time (but that would require an API modification too, adding /tournaments/{id} everywhere)
