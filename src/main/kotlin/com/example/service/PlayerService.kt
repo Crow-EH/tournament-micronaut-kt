@@ -7,35 +7,41 @@ import com.example.model.PlayerDtoCreate
 import com.example.model.PlayerDtoUpdate
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.exceptions.HttpStatusException
+import io.micronaut.transaction.annotation.Transactional
 import jakarta.inject.Singleton
 
 @Singleton
-class PlayerService(private val playerRepository: PlayerRepository) {
+open class PlayerService(private val playerRepository: PlayerRepository) {
 
-    fun findAllPlayerForActiveTournament(): List<PlayerDto> {
+    @Transactional(readOnly = true)
+    open fun findAllPlayerForActiveTournament(): List<PlayerDto> {
         return playerRepository.findAllRanked().map {
             PlayerDto(it.nickname, it.score, it.rank)
         }
     }
 
-    fun findOnePlayerForActiveTournament(nickname: String): PlayerDto {
+    @Transactional(readOnly = true)
+    open fun findOnePlayerForActiveTournament(nickname: String): PlayerDto {
         return playerRepository.findByIdRanked(nickname)
                 .map { PlayerDto(it.nickname, it.score, it.rank) }
                 .orElseThrow { HttpStatusException(HttpStatus.NOT_FOUND, "Player $nickname does not exist") }
     }
 
-    fun createPlayer(player: PlayerDtoCreate) {
+    @Transactional
+    open fun createPlayer(player: PlayerDtoCreate) {
         playerRepository.save(Player(player.nickname))
     }
 
-    fun updatePlayer(nickname: String, playerUpdate: PlayerDtoUpdate) {
+    @Transactional
+    open fun updatePlayer(nickname: String, playerUpdate: PlayerDtoUpdate) {
         val player = playerRepository.findById(nickname)
                 .orElseThrow { HttpStatusException(HttpStatus.NOT_FOUND, "Player $nickname does not exist") }
         player.score = playerUpdate.score
         playerRepository.update(player)
     }
 
-    fun deleteAllPlayers() {
+    @Transactional
+    open fun deleteAllPlayers() {
         playerRepository.deleteAll()
     }
 
