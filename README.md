@@ -54,6 +54,7 @@ A Swagger UI documentation is available bellow.
 * Depending on the deployment plan and the scaling configuration, the very basic Flyway migration (at application startup) may not be the best. Having an external tool handling sync between blue/green env could be better, or any other way to ensure service continuity. 
 * Automatic external tests on a real environment would be a plus.
 * Measuring the coverage and scanning the project with Sonarqube would be a plus too.
+* A formatting plugin + check in CI to avoid useless noise in reviews.
 
 ### Better monitoring and a look on the performance
 * The logs should be collected and indexed somewhere, preferably with visualization and monitored aggregations (i.e. error rate, etc.). Something like an ELK or Datadog.
